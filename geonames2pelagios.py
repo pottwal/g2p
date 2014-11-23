@@ -5,8 +5,8 @@ def esc(chars):
 
 # list of featureClasses to export
 # for geonames feature classes see: http://www.geonames.org/export/codes.html
-featureClasses = {'A','H','P','S'} 
-featuresFromClassS = {'AMTH','ANS','DAM','DIKE','FRM','GRVE','HSTS','PYR','PYRS','RUIN','TMPL'}
+featureClasses = ['A','H','P','S'] 
+featuresFromClassS = ['AMTH','ANS','DAM','DIKE','FRM','GRVE','HSTS','PYR','PYRS','RUIN','TMPL']
 
 with open('EG.txt') as f: # download country files from http://download.geonames.org/export/dump/
   output = open('geonamesEG.ttl', 'w')
@@ -54,6 +54,5 @@ with open('EG.txt') as f: # download country files from http://download.geonames
       output.write('  .\n\n')
 
   output.close()
-  print "Converted " + cnt + " places.";
-
+  print "Converted " + str(cnt) + " places.";
 
