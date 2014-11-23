@@ -21,7 +21,7 @@ with open('EG.txt') as f: # download country files from http://download.geonames
   
   reader = csv.reader(f, delimiter='\t', quoting=csv.QUOTE_NONE)
   
-  cnt = 1
+  cnt = 0
   
   for row in reader:
     featureClass = row[6]
@@ -29,15 +29,13 @@ with open('EG.txt') as f: # download country files from http://download.geonames
     if featureClass in featureClasses:
       if (featureClass == "S" and feature not in featuresFromClassS):
           continue
+      cnt = cnt + 1
       idGeonames = row[0]
       placename = row[1] # csv list of variant spellings
       altNames = row[3]
       lat = row[4]
       lon = row[5]
       
-      print str(cnt) + " => " + idGeonames + ": (" + featureClass + " - " + feature +  ") " + placename + " (" + lat + "," + lon + ") " + altNames + "\n"
-      cnt = cnt + 1
-
       output.write('<http://www.geonames.org/' + idGeonames + '> a lawd:Place ;\n')
       output.write('  rdfs:label "' + esc(placename) + '" ;\n')
       
@@ -54,8 +52,8 @@ with open('EG.txt') as f: # download country files from http://download.geonames
         output.write('  geo:location [ geo:lat "' + str(lat) + '"^^xsd:double ; geo:long "' + str(lon) + '"^^xsd:double ] ;\n')
       
       output.write('  .\n\n')
-  
-  output.close()
 
+  output.close()
+  print "Converted " + cnt + " places.";
 
 
